@@ -1,0 +1,6 @@
+[submodule "EFS/Dependencies/spdlog"]
+	path = EFS/Dependencies/spdlog
+	url = https://github.com/gabime/spdlog
+[submodule "EFS/Dependencies/glfw"]
+	path = EFS/Dependencies/glfw
+	url = https://github.com/glfw/glfw

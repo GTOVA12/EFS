@@ -1,5 +1,4 @@
 #pragma once
-
 #ifdef _WIN32
 
 	#ifdef BUILD_API
@@ -10,3 +9,6 @@
 #else
 	#error "EFS supports only Windows!"
 #endif
+
+#define BIT(x) (1<<x)
+#define STRNGIFY(x) #x
