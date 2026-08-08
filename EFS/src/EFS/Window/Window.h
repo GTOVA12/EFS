@@ -6,12 +6,11 @@ namespace EFS {
     class Window
     {
     public:
-        struct WindowData {
-            int Width = 640;
-            int Height = 480;
-            const char* Title = "EFS";
-            bool VSync;
-            std::function<void(Event&)> EventCallback;
+        struct WindowProps {
+            unsigned int Width;
+            unsigned int Height;
+            const char* Title;
+            WindowProps() :Width(640), Height(480), Title("EFS") {};
         };
         virtual ~Window() {}
         virtual void OnUpdate() = 0;
@@ -21,7 +20,7 @@ namespace EFS {
         virtual void SetVSync(bool enabled) = 0;
         virtual bool IsVSync() const = 0;
 
-        static std::unique_ptr<Window> Create(const WindowData& props);
+        static Window* Create(const WindowProps& props = WindowProps());
     };
 }
 

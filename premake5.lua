@@ -56,7 +56,7 @@ project "EFS"
 	}
 
 	filter "configurations:Debug"
-		defines "EFS_DEBUG"
+		defines "EFS_DEBUG","EFS_ENABLE_ASSERTS"
 		symbols "On"
 
 	filter "configurations:Release"

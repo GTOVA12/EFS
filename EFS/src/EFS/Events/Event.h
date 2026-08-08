@@ -31,6 +31,7 @@ namespace EFS {
 	class EFSAPI Event
 	{
 		friend class EventDispatcher;
+		friend class LayerStack;
 	protected:
 		bool m_Handled = false;
 	public:
@@ -50,4 +51,6 @@ namespace EFS {
 	}
 
 }
+template <>
+struct fmt::formatter<EFS::Event> : fmt::ostream_formatter {};
 

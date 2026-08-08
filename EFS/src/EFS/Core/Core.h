@@ -1,4 +1,5 @@
 #pragma once
+#include "log.h"
 #ifdef _WIN32
 
 	#ifdef BUILD_API
@@ -12,3 +13,11 @@
 
 #define BIT(x) (1<<x)
 #define STRNGIFY(x) #x
+
+#ifdef EFS_ENABLE_ASSERTS
+	#define EFS_ASSERTS(x,...) {if(!x){ EFS_ERROR("Assertion Failed : {0}",__VA_ARGS__); __debugbreak();}}
+	#define EFS_CORE_ASSERTS(x,...) {if(!x){EFS_Core_ERROR("Assertion Failed : {0}",__VA_ARGS__); __debugbreak();}}
+#else
+	#define EFS_ASSERTS(x,...) 
+	#define EFS_CORE_ASSERTS(x,...)
+#endif
