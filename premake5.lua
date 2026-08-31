@@ -11,6 +11,9 @@ workspace "EFS"
    outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 include "EFS/Dependencies/glfw" 
+include "EFS/Dependencies/glad"
+include "EFS/Dependencies/ImGui"
+
 project "EFS"
 	location "EFS"
 	kind "SharedLib"
@@ -31,11 +34,13 @@ project "EFS"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/Dependencies/spdlog/include",
-		"EFS/Dependencies/glfw/include"
+		"%{prj.name}/Dependencies/glfw/include",
+		"%{prj.name}/Dependencies/glad/include",
+		"%{prj.name}/Dependencies/ImGui"
 	}
 	links
 	{
-		"GLFW"
+		"GLFW","glad","ImGui"
 	}
 	filter "system:windows"
 		cppdialect "C++17"
@@ -54,9 +59,10 @@ project "EFS"
 	{
 		("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
 	}
-
+	disablewarnings { "4251" }
+	
 	filter "configurations:Debug"
-		defines "EFS_DEBUG","EFS_ENABLE_ASSERTS"
+		defines {"EFS_DEBUG","EFS_ENABLE_ASSERTS"}
 		symbols "On"
 
 	filter "configurations:Release"

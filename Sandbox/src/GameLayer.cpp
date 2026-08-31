@@ -1,0 +1,17 @@
+#include "pch.h"
+#include "GameLayer.h"
+#include "EFS/Events/EventDispatcher.h"
+namespace EFS {
+    void GameLayer::OnEvent(Event& event)
+    {
+        EventDispatcher Dispatch(event);
+        if (Dispatch.Dispatch<KeyPressedEvent>([this](KeyPressedEvent& event) { return OnKeyPress(event); })) { return; }
+
+    }
+
+    bool GameLayer::OnKeyPress(KeyPressedEvent& event)
+    {
+        EFS_INFO("Player Moved type event {0}", event.GetKeyCode());
+        return true;
+    }
+}

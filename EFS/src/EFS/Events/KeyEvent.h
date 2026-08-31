@@ -5,7 +5,7 @@
 
 namespace EFS {
 
-	class KeyEvent : public Event
+	class EFSAPI KeyEvent : public Event
 	{
 	protected:
 		KeyCode m_KeyCode;
@@ -18,7 +18,7 @@ namespace EFS {
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
 	};
 
-	class KeyPressedEvent : public KeyEvent
+	class EFSAPI KeyPressedEvent : public KeyEvent
 	{
 	private:
 		int m_IRepeatCount;
@@ -39,7 +39,7 @@ namespace EFS {
 		EVENT_CLASS_TYPE(KeyPressed)
 	};
 
-	class KeyReleasedEvent : public KeyEvent
+	class EFSAPI KeyReleasedEvent : public KeyEvent
 	{
 	public:
 		KeyReleasedEvent(const KeyCode keycode)
@@ -56,7 +56,7 @@ namespace EFS {
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
 
-	class KeyTypedEvent : public KeyEvent
+	class EFSAPI KeyTypedEvent : public KeyEvent
 	{
 	public:
 		KeyTypedEvent(const KeyCode keycode)

@@ -29,4 +29,34 @@ namespace EFS {
 				break;
 		}
 	}
+	void LayerStack::PopLayer(const Layer* layer)
+	{
+		auto it = std::find_if(m_StackLayers.begin(), m_StackLayers.begin() + m_LayerInsertIndex,
+			[layer](const std::unique_ptr<Layer>& l) { return (layer == l.get()); });
+
+		if (it != m_StackLayers.begin() + m_LayerInsertIndex)
+		{
+			(*it)->OnDetach();
+			m_StackLayers.erase(it);
+			m_LayerInsertIndex--;
+		}
+	}
+	void LayerStack::PopOverlay(const Layer* layer)
+	{
+		auto it = std::find_if(m_StackLayers.begin() + m_LayerInsertIndex, m_StackLayers.end(),
+			[layer](const std::unique_ptr<Layer>& l) { return (layer == l.get()); });
+
+		if (it != m_StackLayers.end())
+		{
+			(*it)->OnDetach();
+			m_StackLayers.erase(it);
+		}
+	}
+	LayerStack::~LayerStack()
+	{
+		for (std::unique_ptr<Layer>& layer : m_StackLayers)
+		{
+			layer->OnDetach();
+		}
+	}
 }

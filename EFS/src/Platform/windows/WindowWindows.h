@@ -1,5 +1,6 @@
 #pragma once
-#include "GLFW/glfw3.h"
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 #include "EFS/Core/Core.h"
 #include "EFS/Window/Window.h"
 #include "EFS/Events/KeyEvent.h"

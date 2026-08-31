@@ -4,3 +4,6 @@
 [submodule "EFS/Dependencies/glfw"]
 	path = EFS/Dependencies/glfw
 	url = https://github.com/glfw/glfw
+[submodule "EFS/Dependencies/ImGui"]
+	path = EFS/Dependencies/ImGui
+	url = https://github.com/GTOVA12/imgui

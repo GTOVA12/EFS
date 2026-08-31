@@ -135,6 +135,10 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\GameLayer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\GameLayer.cpp" />
     <ClCompile Include="src\SanboxApp.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -33,6 +33,8 @@ namespace EFS
 		m_Window = glfwCreateWindow(m_Data.Width, m_Data.Height, m_Data.Title, NULL, NULL);
 		EFS_CORE_ASSERTS(m_Window,"Window Itialization failed");
 		glfwMakeContextCurrent(m_Window);
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		EFS_CORE_ASSERTS(status, "Failed to initialize Glad!");
 		SetVSync(true);
 
 		glfwSetWindowUserPointer(m_Window, &m_Data);
@@ -48,8 +50,8 @@ namespace EFS
 
 	void WindowWindows::OnUpdate()
 	{
-		glfwPollEvents();        // traite les events en attente (déclenche tes callbacks)
-		glfwSwapBuffers(m_Window); // échange les buffers pour afficher le rendu (à ajouter plus tard si tu as un contexte OpenGL)
+		glfwPollEvents();        // traite les events en attente (déclenche les callbacks)
+		glfwSwapBuffers(m_Window); // échange les buffers pour afficher le rendu (pour OPENGL)
 	}
 
 	void WindowWindows::SetVSync(bool enabled)
