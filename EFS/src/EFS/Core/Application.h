@@ -6,17 +6,21 @@
 namespace EFS 
 {
 	class Window;
-	class LayerStack;
+	class ImGuiLayer;
 
 	class EFSAPI Application
 	{
 	private:
 		std::unique_ptr<Window> m_Window;
+		ImGuiLayer* m_ImGui;
 		LayerStack m_LayerStack;
 		bool m_Running = true;
+		static Application* s_Instance;
 	public:
 		Application();
-		~Application();
+		virtual ~Application();
+		static Application& Get();
+		void* GetWindow() const;
 		void Run();
 		void OnEvent(Event& event);
 		bool OnKeyPress(KeyPressedEvent& event);

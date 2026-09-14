@@ -8,7 +8,8 @@ namespace EFS {
 	public:
 		GameLayer() = default;
 		void OnEvent(Event& event) override;
-		bool GameLayer::OnKeyPress(KeyPressedEvent& event);
+		bool OnKeyPress(KeyPressedEvent& event);
+		void OnImGuiRender() override;
 	};
 }
 

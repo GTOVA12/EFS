@@ -52,6 +52,13 @@ namespace EFS {
 			m_StackLayers.erase(it);
 		}
 	}
+	void LayerStack::OnImGuiRender()
+	{
+		for (std::unique_ptr<Layer>& layer : m_StackLayers)
+		{
+			layer->OnImGuiRender();
+		}
+	}
 	LayerStack::~LayerStack()
 	{
 		for (std::unique_ptr<Layer>& layer : m_StackLayers)

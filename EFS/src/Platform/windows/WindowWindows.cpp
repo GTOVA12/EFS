@@ -28,6 +28,9 @@ namespace EFS
 			int success = glfwInit();
 			EFS_CORE_ASSERTS(success, "glfw Initialization failed");
 			glfwSetErrorCallback(GLFWErrorCallback); /* To display Error related to glfw */
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
 			s_IsGLFWInitialized = true;
 		}
 		m_Window = glfwCreateWindow(m_Data.Width, m_Data.Height, m_Data.Title, NULL, NULL);

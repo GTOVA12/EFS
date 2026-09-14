@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "GameLayer.h"
 #include "EFS/Events/EventDispatcher.h"
+#include <imgui.h>
 namespace EFS {
     void GameLayer::OnEvent(Event& event)
     {
@@ -13,5 +14,12 @@ namespace EFS {
     {
         EFS_INFO("Player Moved type event {0}", event.GetKeyCode());
         return true;
+    }
+
+    void GameLayer::OnImGuiRender()
+    {
+        static int compteur2 = 0;
+        ImGui::Begin("Mon deuxieme Panneau");
+        ImGui::End();
     }
 }

@@ -6,7 +6,7 @@ class Sandbox : public EFS::Application
 public:
 	Sandbox()
 	{
-		PushOverlay(std::make_unique<EFS::GameLayer>());
+		PushLayer(std::make_unique<EFS::GameLayer>());
 	}
 	~Sandbox()
 	{

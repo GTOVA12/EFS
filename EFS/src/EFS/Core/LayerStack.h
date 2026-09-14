@@ -18,5 +18,6 @@ namespace EFS {
 		void PopOverlay(const Layer* layer);
 		void OnUpdate();
 		void OnEvent(Event& event);
+		void OnImGuiRender();
 	};
 }

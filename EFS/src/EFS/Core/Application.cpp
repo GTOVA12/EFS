@@ -3,18 +3,33 @@
 #include "EFS/Window/Window.h"
 #include "EFS/Events/EventDispatcher.h"
 #include "glad/glad.h"
+#include "EFS/ImGui/ImGuiLayer.h"
 namespace EFS
 {
 #define BIND_EVENT_FN(x) std::bind(&Application::x,this,std::placeholders::_1)
-
+    Application* Application::s_Instance = nullptr;
     Application::Application()
     {
+        s_Instance = this;
         Application::m_Window=std::unique_ptr<Window>(Window::Create());
         Application::m_Window->SetEventCallback([this](Event& e) {OnEvent(e); });
+        auto ImGui = std::make_unique<ImGuiLayer>();
+        m_ImGui = ImGui.get();
+        m_LayerStack.PushOverlay(std::move(ImGui));
     }
 
     Application::~Application()
     {
+    }
+
+    Application& Application::Get()
+    {
+        return *s_Instance;
+    }
+
+    void* Application::GetWindow() const
+    {
+       return m_Window->GetNativeWindow();
     }
 
     void Application::Run()
@@ -24,7 +39,12 @@ namespace EFS
         EFS_Core_INFO("  Version: {0}", (const char*)glGetString(GL_VERSION));
         while (m_Running)
         {
+            glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+            glClear(GL_COLOR_BUFFER_BIT);
             Application::m_LayerStack.OnUpdate();
+            Application::m_ImGui->Begin();
+            Application::m_LayerStack.OnImGuiRender();
+            Application::m_ImGui->End();
             Application::m_Window->OnUpdate();
         }
     }
@@ -54,11 +74,6 @@ namespace EFS
     void Application::PopOverlay(const Layer* layer)
     {
         m_LayerStack.PopOverlay(layer);
-    }
-    bool Application::OnKeyPress(KeyPressedEvent& event)
-    {
-        EFS_Core_INFO("it workssss");
-        return true;
     }
     bool Application::OnWindowClose(WindowCloseEvent& event)
     {

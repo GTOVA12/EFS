@@ -16,7 +16,7 @@ include "EFS/Dependencies/ImGui"
 
 project "EFS"
 	location "EFS"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
 
 	targetdir ("bin/"..outputdir.."/%{prj.name}")
@@ -48,17 +48,14 @@ project "EFS"
 		systemversion "latest"
 		defines
 		{
-			"BUILD_API"
+			"BUILD_API",
+			"EFS_STATIC"
 		}
 		buildoptions
 		{
 			"/utf-8"
 		}
 
-	postbuildcommands
-	{
-		("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
-	}
 	disablewarnings { "4251" }
 	
 	filter "configurations:Debug"
@@ -90,16 +87,25 @@ project "Sandbox"
 	includedirs
 	{
 		"EFS/src",
-		"EFS/Dependencies/spdlog/include"
+		"EFS/Dependencies/spdlog/include",
+		"EFS/Dependencies/ImGui"
 	}
 	links
 	{
-		"EFS"
+		    "EFS",
+			"ImGui",
+			"GLFW",
+			"glad",
+			"opengl32.lib"
 	}
 	filter "system:windows"
 		cppdialect "C++17"
 		staticruntime "On"
 		systemversion "latest"
+		defines
+		{
+			"EFS_STATIC"
+		}
 		buildoptions
 		{
 			"/utf-8"

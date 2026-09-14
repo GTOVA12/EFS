@@ -41,6 +41,7 @@ namespace EFS {
 		virtual int GetCategoryFlags() const = 0;
 		virtual std::string ToString() const { return GetName(); }
 		inline bool IsInCategorie(EventCategory Categorie) { return GetCategoryFlags() & Categorie; }
+		inline void MarkHandled() { m_Handled = true; }
 	
 
 	};

@@ -2,13 +2,16 @@
 #include "log.h"
 #ifdef _WIN32
 
-	#ifdef BUILD_API
-		#define EFSAPI __declspec(dllexport)
-	#else
-		#define EFSAPI __declspec(dllimport)
-	#endif
+#if defined(EFS_STATIC)
+	#define EFSAPI
+#elif defined(BUILD_API)
+	#define EFSAPI __declspec(dllexport)
 #else
-	#error "EFS supports only Windows!"
+	#define EFSAPI __declspec(dllimport)
+#endif
+
+#else
+#error "EFS supports only Windows!"
 #endif
 
 #define BIT(x) (1<<x)

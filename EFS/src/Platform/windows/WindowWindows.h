@@ -33,7 +33,8 @@ namespace EFS {
 		void SetEventCallback(const std::function<void(Event&)>& func) override;
 		void OnUpdate() override;
 		void SetVSync(bool enabled) override;
-		bool IsVSync() const override { return m_Data.VSync; }
+		inline void* GetNativeWindow() const override { return m_Window; }
+		inline bool IsVSync() const override { return m_Data.VSync; }
 	private:
 		void SetKeyCallback();
 		void SetWindowCallback();
