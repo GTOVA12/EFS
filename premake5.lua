@@ -36,7 +36,9 @@ project "EFS"
 		"%{prj.name}/Dependencies/spdlog/include",
 		"%{prj.name}/Dependencies/glfw/include",
 		"%{prj.name}/Dependencies/glad/include",
-		"%{prj.name}/Dependencies/ImGui"
+		"%{prj.name}/Dependencies/ImGui",
+		"%{prj.name}/Dependencies/glm"
+		
 	}
 	links
 	{
@@ -88,7 +90,10 @@ project "Sandbox"
 	{
 		"EFS/src",
 		"EFS/Dependencies/spdlog/include",
-		"EFS/Dependencies/ImGui"
+		"EFS/Dependencies/ImGui",
+		"EFS/Dependencies/glm",
+		"EFS/Dependencies/glad/include"
+
 	}
 	links
 	{
