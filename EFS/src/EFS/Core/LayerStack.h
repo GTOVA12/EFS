@@ -16,7 +16,7 @@ namespace EFS {
 		void PushOverlay(std::unique_ptr<Layer> layer);
 		void PopLayer(const Layer* layer);
 		void PopOverlay(const Layer* layer);
-		void OnUpdate();
+		void OnUpdate(float DeltaTime);
 		void OnEvent(Event& event);
 		void OnImGuiRender();
 	};

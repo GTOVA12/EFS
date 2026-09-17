@@ -13,11 +13,11 @@ namespace EFS {
 		layer->OnAttach();
 		m_StackLayers.emplace_back(std::move(layer));
 	}
-	void LayerStack::OnUpdate()
+	void LayerStack::OnUpdate(float DeltaTime)
 	{
 		for (std::unique_ptr<Layer>& layer : m_StackLayers)
 		{
-			layer->OnUpdate();
+			layer->OnUpdate(DeltaTime);
 		}
 	}
 	void LayerStack::OnEvent(Event& event)

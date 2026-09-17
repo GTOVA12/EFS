@@ -35,11 +35,27 @@ namespace EFS {
 
     }
 
-    void GameLayer::OnUpdate()
+    void GameLayer::OnUpdate(float DeltaTime)
     {
+        m_DeltaTime =  DeltaTime;
+        if (m_Motion == Motion::Extending)
+            m_PositionX += m_Speed * DeltaTime;
+        else if (m_Motion == Motion::Retracting)
+            m_PositionX -=m_Speed * DeltaTime;
+        if (m_PositionX >= 0.5f)
+        {
+            m_PositionX = 0.5f;
+            m_Motion = Motion::Stopped;
+        }
+        if (m_PositionX <=-0.5f)
+        {
+            m_PositionX = -0.5f;
+            m_Motion = Motion::Stopped;
+        }
         m_Shader.use();
         glBindVertexArray(VAO);
         m_Shader.SetFloat("red", red);
+        m_Shader.SetFloat("u_PositionX", m_PositionX);
         glDrawArrays(GL_TRIANGLES, 0, 3);
     }
 
@@ -53,7 +69,27 @@ namespace EFS {
     {
         if (ImGui::Begin("Panneau de couleur"))
         {
-            ImGui::SliderFloat("RedColor", &red, 0.0f, 1.0f);
+            if (ImGui::Button("Sortir"))
+                m_Motion = Motion::Extending;
+
+            ImGui::SameLine();
+
+            if (ImGui::Button("Rentrer"))
+                m_Motion = Motion::Retracting;
+
+            if (ImGui::Button("Stop"))
+                m_Motion = Motion::Stopped;
+
+            if (ImGui::Button("Reinitialiser"))
+            {
+                m_PositionX = -0.5f;
+                m_Motion = Motion::Stopped;
+            }
+            //ImGui::SliderFloat("RedColor", &red, 0.0f, 1.0f);
+            ImGui::Text("Temps par image : %.2f ms", m_DeltaTime * 1000.0f);
+            ImGui::Text("Position X : %.3f", m_PositionX);
+            ImGui::Text("Butee atteinte : %s",
+                m_PositionX >= 0.5f ? "oui" : "non");
         }
         ImGui::End();
     }

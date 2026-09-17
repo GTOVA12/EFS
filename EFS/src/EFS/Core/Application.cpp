@@ -3,6 +3,7 @@
 #include "EFS/Window/Window.h"
 #include "EFS/Events/EventDispatcher.h"
 #include "glad/glad.h"
+#include <GLFW/glfw3.h>
 #include "EFS/ImGui/ImGuiLayer.h"
 namespace EFS
 {
@@ -37,11 +38,16 @@ namespace EFS
         EFS_Core_INFO("Vendor: {0}", (const char*)glGetString(GL_VENDOR));
         EFS_Core_INFO("  Renderer: {0}", (const char*)glGetString(GL_RENDERER));
         EFS_Core_INFO("  Version: {0}", (const char*)glGetString(GL_VERSION));
+        double previousTime = glfwGetTime(), currentTime = 0.0f;
+        float DeltaTime;
         while (m_Running)
         {
+            currentTime = glfwGetTime();
+            DeltaTime = (float)(currentTime - previousTime);
+            previousTime = currentTime;
             glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
             glClear(GL_COLOR_BUFFER_BIT);
-            Application::m_LayerStack.OnUpdate();
+            Application::m_LayerStack.OnUpdate(DeltaTime);
             Application::m_ImGui->Begin();
             Application::m_LayerStack.OnImGuiRender();
             Application::m_ImGui->End();
@@ -83,4 +89,4 @@ namespace EFS
     }
 
 
-}
+} 

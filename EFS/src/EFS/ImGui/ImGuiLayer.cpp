@@ -62,14 +62,14 @@ namespace EFS {
 
 	void ImGuiLayer::OnImGuiRender()
 	{
-		static int compteur = 0;
-		if (ImGui::Begin("Mon premier Panneau"))
-		{
-			ImGui::Text("Compteur : %d", compteur);
-			if (ImGui::Button("Incrementer"))
-				compteur++;
-		}
-		ImGui::End();
+		//static int compteur = 0;
+		//if (ImGui::Begin("Mon premier Panneau"))
+		//{
+		//	ImGui::Text("Compteur : %d", compteur);
+		//	if (ImGui::Button("Incrementer"))
+		//		compteur++;
+		//}
+		//ImGui::End();
 	}
 
 }
